@@ -1,0 +1,6 @@
+TEST01
+
+Gestione database con python
+
+Si lavora con db in memoria (sqlite) e si inseriscono e modifcano dati in una tabella.
+Tutti gli oggetti son in un unico file main.py

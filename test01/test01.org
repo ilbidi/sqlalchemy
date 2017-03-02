@@ -1,0 +1,6 @@
+* TEST01
+** Intro
+Test SqlAlchemy
+
+Piccolo programma che si collega a un database, crea le tabelle, le popola
+e gestisce un loggin di tutto quello che viene fatto
