@@ -29,7 +29,7 @@ def main():
     	def __repr__(self):
     		return '<User(''name''=%s, ''fullname''=%s, ''password''=%s)>' % ( self.name, self.fullname, self.password)
     
-    logging.debug('Crete metadata')
+    logging.debug('Create metadata')
     Base.metadata.create_all(engine)
     logging.debug('Create user Fabio')
     userFabio = User(name='Fabio', fullname='Fabio Bidinotto', password ='pwd')

@@ -4,3 +4,10 @@ Test SqlAlchemy
 
 Piccolo programma che si collega a un database, crea le tabelle, le popola
 e gestisce un loggin di tutto quello che viene fatto
+
+Nel dettaglio
+- Si connnette ad un db in memoria
+- Crea una tabella User con campi: codice utente, nome, password
+- Inserisce un utente A, lo ricerca e lo mostra
+- Inserisce un utente B, lo ricerca e lo mostra
+- Cambia passwird all'utente B, lo ricerca e lo mostra
