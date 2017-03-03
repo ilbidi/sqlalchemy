@@ -1,3 +1,6 @@
+# Test01
+# Creazione di tabella e sua modifica in memoria
+
 import logging
 import sqlalchemy
 from sqlalchemy import create_engine
@@ -28,7 +31,7 @@ def main():
     	password = Column(String)
     	def __repr__(self):
     		return '<User(''name''=%s, ''fullname''=%s, ''password''=%s)>' % ( self.name, self.fullname, self.password)
-    
+
     logging.debug('Create metadata')
     Base.metadata.create_all(engine)
     logging.debug('Create user Fabio')
@@ -44,7 +47,7 @@ def main():
     userFabio2 = User(name='Fabio2', fullname='Fabio Bidinotto2', password ='pwd')
     session.add(userFabio2)
     logging.debug('Added user %s'%userFabio2)
-    
+
 
     # Query tables
     user = session.query(User).filter_by(name='Fabio').first()
@@ -55,7 +58,7 @@ def main():
     user = session.query(User).filter_by(name='Fabio2').first()
     logging.debug('Retieved user %s'%user)
 
-    
+
     logging.info('Test01 end')
 
 if __name__== '__main__':
