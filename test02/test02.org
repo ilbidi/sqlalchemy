@@ -1,0 +1,8 @@
+* TEST02
+** Intro
+Test su separazione dell'oggetto con la definizione del db e il programma di
+utilizzo
+
+si creeranno 2 files
+- main.py da lanciare
+- model.py con la struttura delle tabelle
