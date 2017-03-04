@@ -1,8 +1,14 @@
 * TEST02
 ** Intro
 Test su separazione dell'oggetto con la definizione del db e il programma di
-utilizzo
+utilizzo, copio la struttura del file system dal sito
+https://coderwall.com/p/lt2kew/python-creating-your-project-structure
 
+** Cosa ho fatto
 si creeranno 2 files
 - main.py da lanciare
 - model.py con la struttura delle tabelle
+
+la struttura corretta sembra essere creare in file, database.py, con
+la configurazione del database da importare neglia altri moduli,
+un file, models.py, con le tabelle e un file main.py di lancio.

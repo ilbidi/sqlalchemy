@@ -1,27 +1,27 @@
-# Test01
+# Test02
 # Creazione di tabella e sua modifica in memoria
 
+import sys
 import logging
 import sqlalchemy
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+import database
+import models
+
 from sqlalchemy.orm import sessionmaker
-from model import User
+from database import Base,engine
+from models import User
+
+# DB configure
+
+# Configure logging
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# Display SqlAlchemy version
+logging.debug('SqlAlchemy version : %s.'%sqlalchemy.__version__)
+
 
 def main():
-    # Configure logging
-    logging.basicConfig(filename='main.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     # Start program
-    logging.info('Test01 start')
-    # Display SqlAlchemy version
-    logging.debug('SqlAlchemy version : %s.'%sqlalchemy.__version__)
-
-    logging.debug('Connect to db')
-    engine = create_engine('sqlite:///:memory:', echo=True)
-
-    logging.debug('Create a declarative base')
-    Base = declarative_base()
+    logging.info('Test02 start')
 
     logging.debug('Create metadata')
     Base.metadata.create_all(engine)
@@ -45,12 +45,13 @@ def main():
     logging.debug('Retieved user %s'%user)
 
     # Change a user and cheack if it's changed
+    logging.debug('Try to change user password')
     userFabio2.password='pwdchg'
     user = session.query(User).filter_by(name='Fabio2').first()
     logging.debug('Retieved user %s'%user)
 
 
-    logging.info('Test01 end')
+    logging.info('Test02 end')
 
 if __name__== '__main__':
     main()
