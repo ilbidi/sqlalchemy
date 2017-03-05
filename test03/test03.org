@@ -19,3 +19,21 @@ Ristrutturazione programmi per gestione con unit testing
 Ho installato il pacchetto nose con pip install nose
 In pratica si tratta di spostare quanto fatto nel main in un pacchetto
 di test. Il main potrebbe anche essere lasciato vuoto
+
+*** DONE Creare un main
+Creato un main con un file di configurazione log separato.
+PEr richiamare il sistema esegure un import logconfig e caricare il logger con la funzione logging.getLogger, buona pratica è utilizare l'attributo 
+__name__ per definire quale sia il modulo che esegue il log
+
+*** DONE Creare nella directory models una struttura tabella
+Porre attenzione a certi tipi di database, non tutti i campi sono supportati
+(o sono supportati in modi diversi, ad esempio in mysql è obbligatorio
+inserire la lunghezza di un campo stringa)
+
+*** DONE Creare un test che verifichi la creazione e distruzione DB
+Per alcuni tipi di DB, tipo mysql, in fase di tar down va prima esegito un roll back 
+della sessione per essere pena il blocco del test.
+
+per i test ho utilizzato nose, un comando importante (oltre al paramatro -v per vedere che test 
+staeseguendo) è --nocapture che permette di vedere a video lo stdout che, normalmente, 
+è noascosto da nose.
