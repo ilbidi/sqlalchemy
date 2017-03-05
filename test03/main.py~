@@ -1,9 +1,0 @@
-# Main program. Per ora non fa nulla se non caricare il sistema di logging
-
-
-def main():
-    return
-
-if __name__=='main':
-    main()
-    
