@@ -39,3 +39,7 @@ Thumbs.db
 # Custom Files and directories #
 ################################
 sqlalchemy-workspace/
+*~
+*#
+*.db
+*.pyc

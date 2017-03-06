@@ -1,0 +1,96 @@
+* TEST02
+** Intro
+Test su separazione dell'oggetto con la definizione del db e il programma di
+utilizzo, copio la struttura del file system dal sito
+https://coderwall.com/p/lt2kew/python-creating-your-project-structure
+
+** Cosa ho fatto
+si creeranno 2 files
+- main.py da lanciare
+- model.py con la struttura delle tabelle
+
+la struttura corretta sembra essere creare in file, database.py, con
+la configurazione del database da importare neglia altri moduli,
+un file, models.py, con le tabelle e un file main.py di lancio.
+
+* TEST03
+** Intro
+Ristrutturazione programmi per gestione con unit testing
+Ho installato il pacchetto nose con pip install nose
+In pratica si tratta di spostare quanto fatto nel main in un pacchetto
+di test. Il main potrebbe anche essere lasciato vuoto
+
+*** DONE Creare un main
+Creato un main con un file di configurazione log separato.
+PEr richiamare il sistema esegure un import logconfig e caricare il logger con la funzione logging.getLogger, buona pratica è utilizare l'attributo 
+__name__ per definire quale sia il modulo che esegue il log
+
+*** DONE Creare nella directory models una struttura tabella
+Porre attenzione a certi tipi di database, non tutti i campi sono supportati
+(o sono supportati in modi diversi, ad esempio in mysql è obbligatorio
+inserire la lunghezza di un campo stringa)
+
+*** DONE Creare un test che verifichi la creazione e distruzione DB
+Per alcuni tipi di DB, tipo mysql, in fase di tar down va prima esegito un roll back 
+della sessione per essere pena il blocco del test.
+
+per i test ho utilizzato nose, un comando importante (oltre al paramatro -v per vedere che test 
+staeseguendo) è --nocapture che permette di vedere a video lo stdout che, normalmente, 
+è noascosto da nose.
+* TEST04
+** Intro
+Strutturazione models per gestione ricezione dati da rilevatori distribuiti
+si creeranno nuove classi e nuove tabelle.
+A grandi linee la base dati sarà organizzata così
+
+| Modello    | Note                                            | Relazioni |
+|------------+-------------------------------------------------+-----------|
+| device     | Dispositivo che legge i dati (microcontrollore) |           |
+| devicetype | Tipo di dispositivo                             |           |
+| sensortype | Tipo di sensore                                 |           |
+| data       | Dati ricevuti dai dispositivi                   |           |
+
+** TODO Definire modelli dati e relazioni
+*** DONE tabella device
+| Campo       | Tipo        | Note                                |
+|-------------+-------------+-------------------------------------|
+| id          | Integer     | chiave unica autoincrementante      |
+| code        | String(100) | Codice device                       |
+| description | String(256) | Descrizione dispositivo             |
+| devicetype  | devicetype  | Tipo dispositivo                    |
+| sensorstype | sensorstype | Lista tipologie sensori dispositivo |
+|             |             |                                     |
+*** DONE tabella devicetype
+| Campo       | Tipo        | Note                                |
+|-------------+-------------+-------------------------------------|
+| id          | Integer     | chiave unica autoincrementante      |
+| code        | String(100) | Codice devicetype                   |
+| description | String(256) | Descrizione tipo dispositivo        |
+|             |             |                                     |
+*** DONE tabella sensortype
+| Campo       | Tipo        | Note                                |
+|-------------+-------------+-------------------------------------|
+| id          | Integer     | chiave unica autoincrementante      |
+| code        | String(100) | Codice sensortype                   |
+| description | String(256) | Descrizione tipo sensore            |
+|             |             |                                     |
+*** DONE tabella data
+| Campo      | Tipo       | Note                                  |
+|------------+------------+---------------------------------------|
+| id         | Integer    | chiave unica autoincrementante        |
+| timestamp  | datetime   | Data e ora di lettura valore          |
+| device     | device     | Dispositivo da cui il dato è ricevuto |
+| sensortype | sensortype | Tipo di sensore                       |
+| value      | float      | Valore sensore                        |
+|            |            |                                       | 
+*** TODO Su base dati
+Va almento implementata l'unità di misura con la quale interpretare
+il valore del sensore
+
+** TODO Implementare models
+*** TODO classe device
+*** TODO classe device type
+*** TODO classe sensortype
+*** TODO classe data
+
+** TODO Implementare test

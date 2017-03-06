@@ -1,0 +1,146 @@
+% Created 2017-03-05 Sun 21:34
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\date{\today}
+\title{test}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{TEST02}
+\label{sec-1}
+\subsection{Intro}
+\label{sec-1-1}
+Test su separazione dell'oggetto con la definizione del db e il programma di
+utilizzo, copio la struttura del file system dal sito
+\url{https://coderwall.com/p/lt2kew/python-creating-your-project-structure}
+
+\subsection{Cosa ho fatto}
+\label{sec-1-2}
+si creeranno 2 files
+\begin{itemize}
+\item main.py da lanciare
+\item model.py con la struttura delle tabelle
+\end{itemize}
+
+la struttura corretta sembra essere creare in file, database.py, con
+la configurazione del database da importare neglia altri moduli,
+un file, models.py, con le tabelle e un file main.py di lancio.
+
+\section{TEST03}
+\label{sec-2}
+\subsection{Intro}
+\label{sec-2-1}
+Ristrutturazione programmi per gestione con unit testing
+Ho installato il pacchetto nose con pip install nose
+In pratica si tratta di spostare quanto fatto nel main in un pacchetto
+di test. Il main potrebbe anche essere lasciato vuoto
+
+\subsubsection{{\bfseries\sffamily DONE} Creare un main}
+\label{sec-2-1-1}
+Creato un main con un file di configurazione log separato.
+PEr richiamare il sistema esegure un import logconfig e caricare il logger con la funzione logging.getLogger, buona pratica è utilizare l'attributo 
+\uline{\uline{name}} per definire quale sia il modulo che esegue il log
+
+\subsubsection{{\bfseries\sffamily DONE} Creare nella directory models una struttura tabella}
+\label{sec-2-1-2}
+Porre attenzione a certi tipi di database, non tutti i campi sono supportati
+(o sono supportati in modi diversi, ad esempio in mysql è obbligatorio
+inserire la lunghezza di un campo stringa)
+
+\subsubsection{{\bfseries\sffamily DONE} Creare un test che verifichi la creazione e distruzione DB}
+\label{sec-2-1-3}
+Per alcuni tipi di DB, tipo mysql, in fase di tar down va prima esegito un roll back 
+della sessione per essere pena il blocco del test.
+
+per i test ho utilizzato nose, un comando importante (oltre al paramatro -v per vedere che test 
+staeseguendo) è --nocapture che permette di vedere a video lo stdout che, normalmente, 
+è noascosto da nose.
+\section{TEST04}
+\label{sec-3}
+\subsection{Intro}
+\label{sec-3-1}
+Strutturazione models per gestione ricezione dati da rilevatori distribuiti
+si creeranno nuove classi e nuove tabelle.
+A grandi linee la base dati sarà organizzata così
+
+\begin{center}
+\begin{tabular}{lll}
+Modello & Note & Relazioni\\
+\hline
+device & Dispositivo che legge i dati (microcontrollore) & \\
+devicetype & Tipo di dispositivo & \\
+sensortype & Tipo di sensore & \\
+data & Dati ricevuti dai dispositivi & \\
+\end{tabular}
+\end{center}
+
+\subsection{{\bfseries\sffamily TODO} Definire modelli dati e relazioni}
+\label{sec-3-2}
+\subsubsection{tabella device}
+\label{sec-3-2-1}
+\begin{center}
+\begin{tabular}{lll}
+Campo & Tipo & Note\\
+\hline
+id & Integer & chiave unica autoincrementante\\
+code & String(100) & Codice device\\
+description & String(256) & Descrizione dispositivo\\
+devicetype & devicetype & Tipo dispositivo\\
+sensorstype & sensorstype & Lista tipologie sensori dispositivo\\
+ &  & \\
+\end{tabular}
+\end{center}
+\subsubsection{tabella devicetype}
+\label{sec-3-2-2}
+\begin{center}
+\begin{tabular}{lll}
+Campo & Tipo & Note\\
+\hline
+id & Integer & chiave unica autoincrementante\\
+code & String(100) & Codice devicetype\\
+description & String(256) & Descrizione tipo dispositivo\\
+ &  & \\
+\end{tabular}
+\end{center}
+\subsubsection{tabella sensortype}
+\label{sec-3-2-3}
+\begin{center}
+\begin{tabular}{lll}
+Campo & Tipo & Note\\
+\hline
+id & Integer & chiave unica autoincrementante\\
+code & String(100) & Codice sensortype\\
+description & String(256) & Descrizione tipo sensore\\
+ &  & \\
+\end{tabular}
+\end{center}
+\subsubsection{tabella data}
+\label{sec-3-2-4}
+
+\subsection{{\bfseries\sffamily TODO} Implementare models}
+\label{sec-3-3}
+\subsection{{\bfseries\sffamily TODO} Implementare test}
+\label{sec-3-4}
+% Emacs 24.4.1 (Org mode 8.2.10)
+\end{document}
