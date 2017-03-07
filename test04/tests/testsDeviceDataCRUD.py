@@ -2,6 +2,7 @@
 import unittest
 import sqlalchemy
 import models
+import datetime
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -24,7 +25,7 @@ class TestSQLiteMemory(unittest.TestCase):
 
     def testCRUD(self):
         # Insert device type
-        dd1 = DeviceData(value=10.0)
+        dd1 = DeviceData(value=10.0, datetimeRead=datetime.datetime.now())
         self.session.add(dd1)
         self.session.commit()
 
@@ -84,7 +85,7 @@ class TestSQLiteOnFile(unittest.TestCase):
 
     def testCRUD(self):
         # Insert device type
-        dd1 = DeviceData(value=10.0)
+        dd1 = DeviceData(value=10.0, datetimeRead=datetime.datetime.now())
         self.session.add(dd1)
         self.session.commit()
 
@@ -143,7 +144,7 @@ class TestMySql(unittest.TestCase):
 
     def testCRUD(self):
         # Insert device type
-        dd1 = DeviceData(value=10.0)
+        dd1 = DeviceData(value=10.0, datetimeRead=datetime.datetime.now())
         self.session.add(dd1)
         self.session.commit()
 

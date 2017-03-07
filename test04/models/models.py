@@ -7,7 +7,7 @@
 import sqlalchemy
 import json
 
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Sequence
 
@@ -83,7 +83,9 @@ class Device(Base):
     code = Column(String(100))
     description = Column(String(100))
     # TODO Device type
-    # TODO list of sensors
+
+    # Sensors
+    sensorType = 
 
     # Show content
     def __repr__(self):
@@ -102,12 +104,15 @@ class DeviceData(Base):
     # Fields
     id = Column(Integer, Sequence('device_data_id_seq'), primary_key = True)
     # TODO timestamp
+    datetimeRead = Column(DateTime)
     # TODO device
     value = Column(Float)
     # Show content
     def __repr__(self):
-        return '<DeviceData(''value''=%f>' % \
-            (self.value)
+        return '<DeviceData(''value''=%f ''DateTimeRead''=%s' % \
+            (self.value, \
+             self.datetimeRead.strftime('%Y-%m-%d %H:%M:%S' ) \
+             if self.datetimeRead is not None else '0000-00-00 00:00:00')
     
     # Check equals
     def __eq__(self, other):
