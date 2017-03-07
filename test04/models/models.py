@@ -1,9 +1,15 @@
 # Modelli per gestione tabelle
+#
+# Alcune note:
+# Per db quali mysql e' necessario definire un lunghezza sui campi stringa
+# Per db quali oracle il campo primary key deve essere gestito quale sequence
+
 import sqlalchemy
 import json
 
 from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Sequence
 
 Base = declarative_base()
 
@@ -12,7 +18,7 @@ class User(Base):
     # Table name
     __tablename__ = 'user'
     # Fields
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, Sequence('user_id_seq'), primary_key = True)
     name = Column(String(100))
     fullname = Column(String(100))
     password = Column(String(100))
@@ -33,7 +39,7 @@ class DeviceType(Base):
     # Table name
     __tablename__ = 'device_type'
     # Fields
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, Sequence('device_type_id_seq'), primary_key = True)
     code = Column(String(100))
     description = Column(String(100))
 
@@ -53,7 +59,7 @@ class SensorType(Base):
     # Table name
     __tablename__ = 'sensor_type'
     # Fields
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, Sequence('sensor_type_id_seq'), primary_key = True)
     code = Column(String(100))
     description = Column(String(100))
 
@@ -73,7 +79,7 @@ class Device(Base):
     # Table name
     __tablename__ = 'device'
     # Fields
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, Sequence('device_id_seq'), primary_key = True)
     code = Column(String(100))
     description = Column(String(100))
     # TODO Device type
@@ -94,7 +100,7 @@ class DeviceData(Base):
     # Table name
     __tablename__ = 'device_data'
     # Fields
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, Sequence('device_data_id_seq'), primary_key = True)
     # TODO timestamp
     # TODO device
     value = Column(Float)
