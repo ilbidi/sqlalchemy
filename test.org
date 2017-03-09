@@ -89,8 +89,8 @@ il valore del sensore
 
 ** TODO Implementare models
 *** TODO classe device
-*** TODO classe device type
-*** TODO classe sensortype
+*** DONE classe device type
+*** DONE classe sensortype
 *** TODO classe data
 
 ** TODO Implementare test
