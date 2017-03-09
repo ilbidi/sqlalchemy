@@ -6,7 +6,7 @@ import models
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models.models import Base, Sensor
+from models.models import Base, Sensor, SensorType
 
 # Test for in memory SQLite
 class TestSQLiteMemory(unittest.TestCase):
@@ -67,6 +67,15 @@ class TestSQLiteMemory(unittest.TestCase):
         self.session.commit()
         self.assertTrue(self.session.query(Sensor).filter_by(code='sensor2').count()==0)
 
+        # Add a relation to a sensor type
+        sensorType = SensorType(code='sensortype1', description='DESCRIPTIONST1');
+        sensor = self.session.query(Sensor).filter_by(code='sensor1').first()
+        sensor.sensorType = sensorType;
+        self.session.commit()
+        print('Sensor = %s' % sensor)
+        self.assertEquals(self.session.query(Sensor).filter_by(code='sensor1').first()\
+                        .sensorType.code, 'sensortype1')
+
 # Test for SQLite on local file
 class TestSQLiteOnFile(unittest.TestCase):
     # Database definition
@@ -126,6 +135,15 @@ class TestSQLiteOnFile(unittest.TestCase):
         self.session.commit()
         self.assertTrue(self.session.query(Sensor).filter_by(code='sensor2').count()==0)
 
+        # Add a relation to a sensor type
+        sensorType = SensorType(code='sensortype1', description='DESCRIPTIONST1');
+        sensor = self.session.query(Sensor).filter_by(code='sensor1').first()
+        sensor.sensorType = sensorType;
+        self.session.commit()
+        print('Sensor = %s' % sensor)
+        self.assertEquals(self.session.query(Sensor).filter_by(code='sensor1').first()\
+                        .sensorType.code, 'sensortype1')
+
 # Test for mysql (tested on localhost with maria db)
 class TestMySql(unittest.TestCase):
     # Database definition (be sure that the db name already exists in database)
@@ -184,3 +202,13 @@ class TestMySql(unittest.TestCase):
         self.session.delete(sensor)
         self.session.commit()
         self.assertTrue(self.session.query(Sensor).filter_by(code='sensor2').count()==0)
+
+        # Add a relation to a sensor type
+        sensorType = SensorType(code='sensortype1', description='DESCRIPTIONST1');
+        sensor = self.session.query(Sensor).filter_by(code='sensor1').first()
+        sensor.sensorType = sensorType;
+        self.session.commit()
+        print('Sensor = %s' % sensor)
+        self.assertEquals(self.session.query(Sensor).filter_by(code='sensor1').first()\
+                        .sensorType.code, 'sensortype1')
+        

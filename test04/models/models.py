@@ -83,11 +83,12 @@ class Device(Base):
     id = Column(Integer, Sequence('device_id_seq'), primary_key = True)
     code = Column(String(100))
     description = Column(String(100))
-    # TODO Device type (many to one)
+    # Device type (many to one)
     device_type_id = Column(Integer, ForeignKey('device_type.id'))
-    deviceType = relationship(DeviceType)
+    deviceType = relationship("DeviceType")
 
     # TODO Sensors
+    sensors = relationship("Sensor")
 
     # Show content
     def __repr__(self):
@@ -107,9 +108,13 @@ class Sensor(Base):
     id = Column(Integer, Sequence('sensor_id_seq'), primary_key = True)
     code = Column(String(100))
     description = Column(String(100))
-    # TODO Sensor type (many to one)
+
+    # Sensor type (many to one)
     sensor_type_id = Column(Integer, ForeignKey('sensor_type.id'))
-    sensorType = relationship(SensorType)
+    sensorType = relationship("SensorType")
+
+    # Relation with device
+    device_id = Column(Integer, ForeignKey('device.id'))
 
     # Show content
     def __repr__(self):
