@@ -6,7 +6,7 @@ import models
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models.models import Base, Device
+from models.models import Base, Device, DeviceType, Sensor, SensorType
 
 # Test for in memory SQLite
 class TestSQLiteMemory(unittest.TestCase):
@@ -67,6 +67,29 @@ class TestSQLiteMemory(unittest.TestCase):
         self.session.commit()
         self.assertTrue(self.session.query(Device).filter_by(code='device2').count()==0)
 
+        # Add a relation to a device type
+        deviceType = DeviceType(code='devicetype1', description='DESCRIPTIONDT1');
+        device = self.session.query(Device).filter_by(code='device1').first()
+        device.deviceType = deviceType;
+        self.session.commit()
+        print('Device = %s' % device)
+        self.assertEquals(self.session.query(Device).filter_by(code='device1').first()\
+                        .deviceType.code, 'devicetype1')
+
+        # Add list of sensors
+        sensor1 = Sensor(code='sensor1', description='DESCRIPTIONS1', \
+                         sensorType=SensorType(code='sensortype1', description='DESCRIPTIONST1'))
+        sensor2 = Sensor(code='sensor2', description='DESCRIPTIONS2', \
+                         sensorType=SensorType(code='sensortype2', description='DESCRIPTIONST2'))
+        device.sensors.append(sensor1)
+        device.sensors.append(sensor2)
+        self.session.commit()
+        # List sensors of a device
+        device = self.session.query(Device).filter_by(code='device1').first()
+        print('Device = %s' % device)
+        for sensor in device.sensors:
+            print('\tSensor = %s' % sensor)
+
 # Test for SQLite on local file
 class TestSQLiteOnFile(unittest.TestCase):
     # Database definition
@@ -126,6 +149,29 @@ class TestSQLiteOnFile(unittest.TestCase):
         self.session.commit()
         self.assertTrue(self.session.query(Device).filter_by(code='device2').count()==0)
 
+        # Add a relation to a device type
+        deviceType = DeviceType(code='devicetype1', description='DESCRIPTIONDT1');
+        device = self.session.query(Device).filter_by(code='device1').first()
+        device.deviceType = deviceType;
+        self.session.commit()
+        print('Device = %s' % device)
+        self.assertEquals(self.session.query(Device).filter_by(code='device1').first()\
+                        .deviceType.code, 'devicetype1')
+
+        # Add list of sensors
+        sensor1 = Sensor(code='sensor1', description='DESCRIPTIONS1', \
+                         sensorType=SensorType(code='sensortype1', description='DESCRIPTIONST1'))
+        sensor2 = Sensor(code='sensor2', description='DESCRIPTIONS2', \
+                         sensorType=SensorType(code='sensortype2', description='DESCRIPTIONST2'))
+        device.sensors.append(sensor1)
+        device.sensors.append(sensor2)
+        self.session.commit()
+        # List sensors of a device
+        device = self.session.query(Device).filter_by(code='device1').first()
+        print('Device = %s' % device)
+        for sensor in device.sensors:
+            print('\tSensor = %s' % sensor)
+
 # Test for mysql (tested on localhost with maria db)
 class TestMySql(unittest.TestCase):
     # Database definition (be sure that the db name already exists in database)
@@ -184,3 +230,26 @@ class TestMySql(unittest.TestCase):
         self.session.delete(device)
         self.session.commit()
         self.assertTrue(self.session.query(Device).filter_by(code='device2').count()==0)
+
+        # Add a relation to a device type
+        deviceType = DeviceType(code='devicetype1', description='DESCRIPTIONDT1');
+        device = self.session.query(Device).filter_by(code='device1').first()
+        device.deviceType = deviceType;
+        self.session.commit()
+        print('Device = %s' % device)
+        self.assertEquals(self.session.query(Device).filter_by(code='device1').first()\
+                        .deviceType.code, 'devicetype1')
+
+        # Add list of sensors
+        sensor1 = Sensor(code='sensor1', description='DESCRIPTIONS1', \
+                         sensorType=SensorType(code='sensortype1', description='DESCRIPTIONST1'))
+        sensor2 = Sensor(code='sensor2', description='DESCRIPTIONS2', \
+                         sensorType=SensorType(code='sensortype2', description='DESCRIPTIONST2'))
+        device.sensors.append(sensor1)
+        device.sensors.append(sensor2)
+        self.session.commit()
+        # List sensors of a device
+        device = self.session.query(Device).filter_by(code='device1').first()
+        print('Device = %s' % device)
+        for sensor in device.sensors:
+            print('\tSensor = %s' % sensor)

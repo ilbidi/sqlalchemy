@@ -58,7 +58,15 @@ A grandi linee la base dati sarà organizzata così
 | code        | String(100) | Codice device                       |
 | description | String(256) | Descrizione dispositivo             |
 | devicetype  | devicetype  | Tipo dispositivo                    |
-| sensorstype | sensorstype | Lista tipologie sensori dispositivo |
+| sensors     | sensors     | Lista sensori dispositivo           |
+|             |             |                                     |
+*** DONE tabella sensor
+| Campo       | Tipo        | Note                                |
+|-------------+-------------+-------------------------------------|
+| id          | Integer     | chiave unica autoincrementante      |
+| code        | String(100) | Codice sensor                       |
+| description | String(256) | Descrizione sensor                  |
+| sensortype  | sensortype  | Tipo sensore                        |
 |             |             |                                     |
 *** DONE tabella devicetype
 | Campo       | Tipo        | Note                                |
@@ -82,14 +90,23 @@ A grandi linee la base dati sarà organizzata così
 | device     | device     | Dispositivo da cui il dato è ricevuto |
 | sensortype | sensortype | Tipo di sensore                       |
 | value      | float      | Valore sensore                        |
-|            |            |                                       | 
+|            |            |                                       |
+*** DONE relazioni
+| Tabelle             | Tipo relazione |
+|---------------------+----------------|
+| sensor - sensorType | many to one    |
+| device - deviceType | many to one    |
+| device - sensor     | one to many    |
+| data   - device     | one to many    |
 *** TODO Su base dati
 Va almento implementata l'unità di misura con la quale interpretare
 il valore del sensore
+** DONE Implementare models
+*** DONE classe device
+*** DONE classe device type
+*** DONE classe sensortype
+*** DONE classe data
 
-** TODO Implementare models
-*** TODO classe device
-*** TODO classe device type
-*** TODO classe sensortype
-*** TODO classe data
-** TODO Implementare test
+** DONE Implementare test
+*** DONE Test CRUD su singola tabella
+*** DONE Test relazioni
