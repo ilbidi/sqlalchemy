@@ -92,5 +92,4 @@ il valore del sensore
 *** TODO classe device type
 *** TODO classe sensortype
 *** TODO classe data
-
 ** TODO Implementare test
