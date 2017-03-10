@@ -28,7 +28,8 @@ __name__ per definire quale sia il modulo che esegue il log
 *** DONE Creare nella directory models una struttura tabella
 Porre attenzione a certi tipi di database, non tutti i campi sono supportati
 (o sono supportati in modi diversi, ad esempio in mysql è obbligatorio
-inserire la lunghezza di un campo stringa)
+inserire la lunghezza di un campo stringa), su altri DB tipo oracle 
+è necessario definire come Sequence i campi autoincrementanti
 
 *** DONE Creare un test che verifichi la creazione e distruzione DB
 Per alcuni tipi di DB, tipo mysql, in fase di tar down va prima esegito un roll back 
@@ -110,3 +111,34 @@ il valore del sensore
 ** DONE Implementare test
 *** DONE Test CRUD su singola tabella
 *** DONE Test relazioni
+* TEST05
+** Intro
+Inserimento e test di funzioni di utilità per la scrittura dati, il loro 
+recupero, la loro visualizzazione (l'idea è di creare un output in 
+json o xml).
+Da sviluppare anche una corretta gestione delle eccezioni
+Funzioni da implementare (l'idea è mascherare gli inserimenti a database)
+| Classe     | Funzione    | Note                                                          |
+|------------+-------------+---------------------------------------------------------------|
+| SensorType | insert      | Inserimento di un tipo sensore, richiede codice e descrizione |
+|            | list        | Recupero lista tipi sensore                                   |
+|            | delete      | Cancellazione                                                 |
+|            | list filter | Recupero lista filtrata                                       |
+| DeviceType | insert      | vedi sopra                                                    |
+|            | list        | vedi sopra                                                    |
+|            | delete      |                                                               |
+|            | list filter |                                                               |
+| Sensor     | insert      |                                                               |
+|            | list        |                                                               |
+|            | delete      |                                                               |
+|            | list filter |                                                               |
+| Device     | insert      |                                                               |
+|            | list        |                                                               |
+|            | delete      |                                                               |
+|            | list filter |                                                               |
+| DeviceData | insert      | Inserimento di un valore, si richiede che si a obbligatorio   |
+|            |             | un dispositivo                                                |
+|            | list        | Elenco di tutta la lista delle letture                        |
+|            | delete      | Cancellazine di una lettura                                   |
+|            | list filter | lista filtrata, verificare bene il filtro per data            |
+|            |             |                                                               |
