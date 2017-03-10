@@ -87,7 +87,7 @@ class Device(Base):
     device_type_id = Column(Integer, ForeignKey('device_type.id'))
     deviceType = relationship("DeviceType")
 
-    # TODO Sensors
+    # Sensors
     sensors = relationship("Sensor")
 
     # Show content
@@ -132,10 +132,17 @@ class DeviceData(Base):
     __tablename__ = 'device_data'
     # Fields
     id = Column(Integer, Sequence('device_data_id_seq'), primary_key = True)
-    # TODO timestamp
+
+    # timestamp
     datetimeRead = Column(DateTime)
-    # TODO device
+
+    # Device (many to one)
+    device_id = Column(Integer, ForeignKey('device.id'))
+    device = relationship("Device")
+
+    # Data read from a device
     value = Column(Float)
+
     # Show content
     def __repr__(self):
         return '<DeviceData(''value''=%f ''DateTimeRead''=%s' % \
