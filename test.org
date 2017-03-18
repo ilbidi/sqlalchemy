@@ -141,4 +141,35 @@ Funzioni da implementare (l'idea è mascherare gli inserimenti a database)
 |            | list        | Elenco di tutta la lista delle letture                        |
 |            | delete      | Cancellazine di una lettura                                   |
 |            | list filter | lista filtrata, verificare bene il filtro per data            |
+|            | json out    | Ouput oggetto in json                                         |
+|            | Xml oul     | Output oggetto in xml                                         |
 |            |             |                                                               |
+L'idea è di iniziare dalla classe superiore, Device Data in modo da vedere cosa serve
+per popolarla
+** TODO Classe User
+Cominciamo da una semplice classe dove creeremo un metodo getJson
+*** TODO Json output
+*** TODO Xmloutput
+** TODO Classe Device Data
+*** TODO Xml output
+Estrazione dei dati classe device data in xml
+*** TODO Json output
+Estrazione dei dati classe device data in json
+* TEST06
+** Intro
+Funzioni di utilità, si crea una nuova classe nel pacchetto model con funzioni di utilità per inserire dati 
+nel db
+| Funzione         | Note                                                  |
+|------------------+-------------------------------------------------------|
+| insertSensorType | Inserimento di un nuovo tipo di sensore, si richiede  |
+|                  | codice e decrizione, nel caso in cui sia già presente |
+|                  | si va in update                                       |
+| insertSensor     | Inserimento di un sensore richiediamo codice e        |
+|                  | Descrizione e tipo sensore                            |
+| insertDeviceType |                                                       |
+| insertDevice     |                                                       |
+| addSensorDevice  |                                                       |
+| insertDataRead   |                                                       |
+|                  |                                                       |
+
+Ad ora non sono arrivato a nulla
